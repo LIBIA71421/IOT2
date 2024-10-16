@@ -2,8 +2,8 @@
 #include <PubSubClient.h>
 
 // Configuración de la red WiFi y MQTT
-const char* ssid = "ResiCapilla";
-const char* password = "ResidenciaE@";
+const char* ssid = "Rela";
+const char* password = "ReiaE@";
 const char* mqtt_server = "broker.hivemq.com";
 const int mqtt_port = 1883;
 const char* mqtt_topic_led = "tito/LED";            // Tópico para el control automático del LED
