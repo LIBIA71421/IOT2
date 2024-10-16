@@ -1,8 +1,16 @@
 #include <WiFi.h>
 #include <PubSubClient.h>
 
+<<<<<<< HEAD
 const char* ssid = "ResiCapilla";
 const char* password = "ResidenciaE@";
+=======
+// Configuración de la red WiFi
+const char* ssid = "Capilla";
+const char* password = "nciaE@";
+
+// Configuración del broker MQTT
+>>>>>>> 3e96242c14f34cf4f500bfde3aaf101931afa618
 const char* mqtt_server = "broker.hivemq.com";
 const int mqtt_port = 1883;
 const char* mqtt_topic_led = "tito/LED";
@@ -104,5 +112,36 @@ void setup() {
 }
 
 void loop() {
+<<<<<<< HEAD
   smartLED.loop();
 }
+=======
+  if (!client.connected()) {
+    reconnect();
+  }
+  client.loop();
+
+  // Leer el valor de humedad del sensor
+  humedad = analogRead(sensorPin);  // Leer el valor analógico del sensor de humedad
+  float porcentajeHumedad = map(humedad, 0, 4095, 0, 100);  // Convertir el valor a porcentaje (suponiendo un rango de 0 a 100%)
+
+  // Publicar el valor de humedad a través de MQTT
+  String humedadStr = String(porcentajeHumedad);
+  client.publish(mqtt_topic_humidity, humedadStr.c_str());
+  
+  Serial.print("Humedad: ");
+  Serial.print(porcentajeHumedad);
+  Serial.println("%");
+
+  // Si la humedad es mayor al 50%, encender el LED
+  if (porcentajeHumedad > 50) {
+    digitalWrite(ledPin, HIGH);  
+    Serial.println("necesita humedad, LED prendido");
+  }else{
+    digitalWrite(ledPin, LOW);  
+    Serial.println("humedo, LED apagado");  
+  }
+
+  delay(2000);  // Esperar 2 segundos antes de leer y publicar de nuevo
+}
+>>>>>>> 3e96242c14f34cf4f500bfde3aaf101931afa618
